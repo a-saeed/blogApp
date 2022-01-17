@@ -1,0 +1,33 @@
+{
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "a back-end api to power a blog application using nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-saeed/Blog-app.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "mongo",
+    "express",
+    "api"
+  ],
+  "author": "a-saeed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-saeed/Blog-app/issues"
+  },
+  "homepage": "https://github.com/a-saeed/Blog-app#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^14.1.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "multer": "^1.4.4"
+  }
+}
