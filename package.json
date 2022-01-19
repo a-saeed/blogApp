@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/a-saeed/Blog-app#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
     "dotenv": "^14.1.1",
     "express": "^4.17.2",
