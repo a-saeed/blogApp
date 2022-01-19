@@ -6,7 +6,16 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     profilePic: { type: String, default: "" },
 },
-    { timestamps: true }
+    {
+        timestamps: true,
+        //hide the password when user info is returned
+        toJSON: {
+            transform: (doc, ret) => {
+                delete ret.password
+            }
+        }
+    }
+    
 );
 
 module.exports = mongoose.model("user", userSchema);
