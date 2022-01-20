@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
+const CustomError = require('../model/customError');
 
 //register new user to the system
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
     try {
         //encrypt the password
         const salt = await bcrypt.genSalt(10)
@@ -18,7 +19,7 @@ const registerUser = async (req, res) => {
         const user = await newUser.save()
         res.status(200).json(user)
     } catch (err) {
-        res.status(500).json(err.message);
+        next(new CustomError(500, "a problem happened while registering... " + err.message))
     }
 }
 

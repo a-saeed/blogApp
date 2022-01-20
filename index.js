@@ -15,5 +15,10 @@ mongoose.connect(process.env.URI , { useNewUrlParser : true, useUnifiedTopology 
 //middleware
 app.use(express.json());
 app.use("/api/auth", authRoute);
-
+//error handler middleware
+app.use((err, req, res, next) => {
+    res.send({
+        error: err
+    })
+})
 app.listen(port , ()=> console.log('> Server is up and running on port : ' + port))
