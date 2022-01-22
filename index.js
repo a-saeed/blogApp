@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const authRoute = require('./routes/auth');
 const cookieParser = require('cookie-parser');
+const userRouter = require('./routes/userRoutes');
 //constants
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,6 +18,8 @@ mongoose.connect(process.env.URI , { useNewUrlParser : true, useUnifiedTopology 
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api/auth", authRoute);
+//user functionalities
+app.use("/api/user", userRouter)
 //error handler middleware
 app.use((err, req, res, next) => {
     res.statusCode = err.statusCode;
