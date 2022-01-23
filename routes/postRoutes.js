@@ -1,10 +1,11 @@
-const  createPost  = require('../controllers/postController')
+const { createPost, updatePost }  = require('../controllers/postController')
 const checkAuthentication = require('../middlewares/checkAuthentication')
 
 const postRouter = require('express').Router()
 
-//create new post for auth users
+//{create-update} new post for auth users
 postRouter.post("/", checkAuthentication, createPost)
+postRouter.put("/:id", checkAuthentication, updatePost)
 
 
 module.exports  = postRouter
