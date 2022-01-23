@@ -6,6 +6,7 @@ require('dotenv').config()
 const authRoute = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
+const postRouter = require('./routes/postRoutes');
 //constants
 const app = express()
 const port = process.env.PORT || 3000
@@ -20,6 +21,8 @@ app.use(cookieParser())
 app.use("/api/auth", authRoute);
 //user functionalities
 app.use("/api/user", userRouter)
+//post functionalities
+app.use("/api/post", postRouter)
 //error handler middleware
 app.use((err, req, res, next) => {
     res.statusCode = err.statusCode;
