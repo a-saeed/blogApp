@@ -30,4 +30,16 @@ const updatePost = async (req, res, next) => {
     }
 }
 
-module.exports = { createPost, updatePost }
+const deletePost = async (req, res, next) => {
+    try {
+        //return post and check if current user has access to it
+        const post = await postModel.findById(req.params.id).catch(err => { res.statusCode = 500; throw "post doesn't exist" });
+        if (req.user.username !== post.username) { res.statusCode = 401; throw "you don't have access to this post" };
+        await post.delete();
+        res.status(200).json("post deleted successfully");
+    }
+    catch (err) {
+        next(new CustomError(res.statusCode, err))
+    }
+}
+  module.exports = { createPost, updatePost, deletePost }
