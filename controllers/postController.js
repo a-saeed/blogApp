@@ -42,4 +42,36 @@ const deletePost = async (req, res, next) => {
         next(new CustomError(res.statusCode, err))
     }
 }
-  module.exports = { createPost, updatePost, deletePost }
+
+//get all posts of current user
+const getPosts = async (req, res, next) => {
+    /**
+     * check if it is a query parameter
+     * we can retrieve posts with certain categories 
+     * or posts of some user other than the current logged in user
+     */
+    const username = req.query.user; 
+    const category = req.query.cat; 
+    try {
+        //post is an array the will hold returned posts
+        let posts;
+        //does the url specify a username?
+        if (username)
+            posts = await postModel.find({ username: username }).catch(err => { res.statusCode = 404; throw "error in connection to db"}); //we could make it {username} for short
+        /**
+         * does the url specify certain categories of posts?
+         * match and return entire posts that has the same category
+         */
+        else if (category)
+            posts = await postModel.find({ categories: { $in: [category] } }).catch(err => { res.statusCode = 404; throw "error in connection to db"})
+        //if the url doesn't contain any query parameters, return all posts in database
+        else
+            posts = await postModel.find().catch(err => { res.statusCode = 404; throw "error in connection to db" })
+        
+        //send response
+        res.status(200).json(posts)
+    } catch (err) {
+        next(new CustomError(res.statusCode, err))
+    }
+}
+  module.exports = { createPost, updatePost, deletePost, getPosts }
