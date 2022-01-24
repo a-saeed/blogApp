@@ -7,6 +7,7 @@ const authRoute = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
 const postRouter = require('./routes/postRoutes');
+const categoryRouter = require('./routes/categoryRoutes');
 //constants
 const app = express()
 const port = process.env.PORT || 3000
@@ -23,6 +24,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRouter)
 //post functionalities
 app.use("/api/post", postRouter)
+//category functionalities
+app.use("/api/category", categoryRouter)
 //error handler middleware
 app.use((err, req, res, next) => {
     res.statusCode = err.statusCode;
